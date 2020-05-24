@@ -1,0 +1,36 @@
+---
+- name: Install catalyst with cpanm
+  cpanm:
+    name: "{{ item }}"
+  with_items:
+    - YAML
+    - Catalyst::Runtime
+    - Catalyst::Devel
+  tags: perl-catalyst
+
+- name: Create catalyst exec file symbolic link to /usr/loacl/bin/
+  file:
+    src: /usr/local/bin/perl-{{ pl_major_version }}/bin/{{ item }}
+    dest: /usr/local/bin/{{ item }}
+    state: link
+  with_items:
+    - catalyst.pl
+    - config_data
+    - cpanel_json_xs
+    - findrule
+    - lwp-download
+    - lwp-dump
+    - lwp-mirror
+    - lwp-request
+    - moose-outdated
+    - net-server
+    - package-stash-conflicts
+    - plackup
+    - scandeps.pl
+    - starman
+    - test-yaml
+    - tpage
+    - ttree
+    - use-devel-assertos
+  tags: perl-catalyst
+
